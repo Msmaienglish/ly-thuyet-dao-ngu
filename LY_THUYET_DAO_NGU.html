@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LÝ THUYẾT ĐẢO NGỮ</title>
+<style>
+:root{
+  --purple:#6C2BD9; --blue:#2563EB; --cyan:#06B6D4; --orange:#FF8A3D;
+  --yellow:#FACC15; --green:#22C55E; --pink:#EC4899; --bg:#F6F7FF;
+  --ink:#1f2937; --muted:#64748b; --card:#ffffff; --line:#dbe4ff;
+  --good:#dff7e7; --goodText:#166534; --bad:#ffe4e8; --badText:#9f1239;
+  --softPurple:#f3efff; --softBlue:#eef6ff; --softOrange:#fff3e8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Nunito","Segoe UI",Arial,sans-serif;background:
+  radial-gradient(circle at 8% 8%,rgba(108,43,217,.09),transparent 28%),
+  radial-gradient(circle at 92% 12%,rgba(6,182,212,.10),transparent 30%),
+  linear-gradient(180deg,#fbfcff 0%,var(--bg) 100%);color:var(--ink);min-height:100vh;overflow-x:hidden}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid rgba(37,99,235,.28);outline-offset:2px}
+.hidden{display:none!important}
+.app{width:min(1100px,94vw);margin:0 auto;padding:18px 0 42px;position:relative;z-index:2}
+.decor{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.decor span{position:absolute;opacity:.18;font-size:26px;animation:float 7s ease-in-out infinite}
+.decor span:nth-child(1){left:3%;top:12%}.decor span:nth-child(2){right:5%;top:17%;animation-delay:1s}
+.decor span:nth-child(3){left:4%;bottom:14%;animation-delay:2s}.decor span:nth-child(4){right:4%;bottom:10%;animation-delay:3s}
+.decor span:nth-child(5){left:47%;top:4%;animation-delay:4s}.decor span:nth-child(6){right:20%;bottom:4%;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(6deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes correctBounce{0%{transform:scale(1)}50%{transform:scale(1.015)}100%{transform:scale(1)}}
+@keyframes wrongShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+@keyframes modalPop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes progressGrow{from{width:0}}
+.welcome{min-height:92vh;display:grid;place-items:center}
+.welcome-card{width:min(860px,95vw);background:rgba(255,255,255,.95);border:1px solid #e6e8ff;border-radius:28px;padding:34px;box-shadow:0 22px 60px rgba(70,74,135,.12);animation:fadeIn .55s ease}
+.brand-badge{display:inline-flex;gap:8px;align-items:center;padding:7px 12px;border-radius:999px;background:#f4f1ff;color:var(--purple);font-weight:800;font-size:13px}
+h1{font-family:"Fredoka","Segoe UI",Arial,sans-serif;font-size:clamp(28px,4vw,44px);margin:14px 0 5px;line-height:1.05;background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{font-size:18px;color:#475569;margin:0 0 22px;font-weight:700}
+.intro-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0 24px}
+.intro-box{padding:18px;border-radius:18px;border:1px solid #e9e7ff;background:linear-gradient(180deg,#fff,#faf9ff)}
+.intro-box strong{display:block;color:var(--purple);font-size:18px}.intro-box span{color:#64748b}
+.student-form{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:20px}
+.field label{display:block;font-weight:800;margin-bottom:7px;font-size:14px}.field input{width:100%;padding:13px 14px;border-radius:14px;border:1.5px solid #d9ddf5;background:#fff}
+.primary{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;font-weight:900;box-shadow:0 10px 24px rgba(80,71,190,.22)}
+.secondary{border:1px solid #d8ddf4;border-radius:13px;padding:11px 14px;background:#fff;color:#334155;font-weight:800}
+.soft{border:1px solid #e7defe;border-radius:13px;padding:11px 14px;background:#f8f5ff;color:var(--purple);font-weight:800}
+.top-header{background:rgba(255,255,255,.94);border:1px solid #e6e9fb;border-radius:20px;padding:14px 16px;box-shadow:0 10px 30px rgba(80,80,130,.07);margin-bottom:12px}
+.header-row{display:flex;justify-content:space-between;align-items:center;gap:14px}.title-mini{font-weight:1000;font-size:22px;color:var(--purple)}.meta{font-size:13px;color:#64748b;line-height:1.45}
+.toolbar{position:sticky;top:8px;z-index:10;background:rgba(255,255,255,.96);backdrop-filter:blur(9px);border:1px solid #e4e7f7;border-radius:18px;padding:10px 12px;box-shadow:0 10px 30px rgba(50,60,100,.10);margin-bottom:18px}
+.toolbar-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.stats{display:flex;flex-wrap:wrap;gap:8px}.pill{padding:7px 10px;border-radius:999px;background:#f7f7ff;color:#475569;font-size:12px;font-weight:900;border:1px solid #ececff}.toolbar-actions{display:flex;gap:8px;flex-wrap:wrap}
+.icon-btn{border:1px solid #dfe3f6;background:white;border-radius:12px;padding:8px 10px;font-weight:900;color:#475569}
+.progress-track{height:9px;background:#e9ecf9;border-radius:999px;overflow:hidden;margin-top:10px}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--blue),var(--cyan));transition:width .35s ease}
+.question-card{background:rgba(255,255,255,.98);border:1px solid #e2e7fa;border-radius:24px;box-shadow:0 18px 45px rgba(60,66,120,.09);padding:24px;animation:fadeIn .35s ease}
+.q-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}.q-num{font-weight:1000;color:#fff;background:linear-gradient(135deg,var(--purple),var(--blue));padding:8px 12px;border-radius:12px}.q-cat{font-size:12px;font-weight:900;color:#075985;background:#e6f7ff;padding:7px 10px;border-radius:999px}.q-title{font-size:20px;line-height:1.55;font-weight:900;margin:10px 0 16px}.instruction{padding:10px 12px;border-left:4px solid var(--orange);background:var(--softOrange);border-radius:10px;color:#7c2d12;font-weight:800;margin:10px 0 16px}
+.options{display:grid;gap:10px}.option{width:100%;text-align:left;border:1.5px solid #dfe5f8;background:#fbfcff;border-radius:16px;padding:13px 14px;display:flex;gap:11px;align-items:flex-start;min-height:52px;transition:.18s ease;color:#273449}.option:hover:not(:disabled){transform:translateY(-1px);border-color:#b7c4f5;box-shadow:0 8px 18px rgba(59,76,160,.07)}.letter{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:#eef2ff;color:var(--purple);font-weight:1000;flex:0 0 auto}.option.correct{background:var(--good);border-color:#8ed7a5;color:var(--goodText);animation:correctBounce .35s ease}.option.wrong{background:var(--bad);border-color:#f5a8b6;color:var(--badText);animation:wrongShake .35s ease}.option.correct .letter{background:#bbefc9;color:#166534}.option.wrong .letter{background:#ffc8d1;color:#9f1239}.option:disabled{cursor:default}
+.tf-grid{grid-template-columns:repeat(2,1fr)}
+.fill-row{display:flex;gap:10px;align-items:stretch}.answer-input,.writing-box{width:100%;border:1.5px solid #dfe5f8;border-radius:14px;padding:13px 14px;background:#fff}.writing-box{min-height:145px;resize:vertical;line-height:1.55}
+.original-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:14px;line-height:1.55;margin-bottom:10px}.keyword{display:inline-block;background:#fff0e3;color:#9a3412;padding:6px 10px;border-radius:10px;font-weight:1000;margin:4px 0 12px}.writing-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.hint-box{margin-top:10px;padding:11px 12px;border-radius:12px;background:#fff8db;color:#713f12;border:1px solid #f8df85;font-weight:700}
+.feedback{margin-top:16px;border-radius:16px;padding:14px 16px;font-weight:900;display:flex;align-items:center;gap:10px}.feedback.good{background:var(--good);color:var(--goodText);border:1px solid #a7e2ba}.feedback.bad{background:var(--bad);color:var(--badText);border:1px solid #f6b7c3}.feedback.near{background:#fff7d6;color:#854d0e;border:1px solid #f4d86d}
+.explanation{margin-top:14px;background:linear-gradient(180deg,#fffdf5,#faf8ff);border:1px solid #ece2bd;border-radius:18px;padding:18px;animation:fadeIn .25s ease}.explanation h3{margin:0 0 12px;color:#7c3aed;font-size:18px}.ex-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ex-item{padding:11px;border-radius:12px;background:white;border:1px solid #edf0f7;line-height:1.5}.ex-item strong{color:#334155}.option-analysis{margin-top:12px;display:grid;gap:8px}.analysis-row{padding:10px 12px;border-radius:12px;background:#fff;border:1px solid #edf0f6;line-height:1.5}.answer-highlight{font-weight:1000;color:#166534;background:#ecfdf3;border:1px solid #b7ebc8;padding:10px 12px;border-radius:12px;margin-top:10px}.structure{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f1f5f9;padding:9px 10px;border-radius:10px;font-weight:800;color:#334155}
+.nav-row{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.nav-row button{min-width:130px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(17,24,39,.5);display:grid;place-items:center;padding:18px;z-index:100}.modal{width:min(880px,96vw);max-height:88vh;overflow:auto;background:#fff;border-radius:24px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.24);animation:modalPop .22s ease}.modal h2{margin-top:0;color:var(--purple)}.close-x{float:right;border:0;background:#f1f5f9;border-radius:10px;width:38px;height:38px;font-size:18px}.theory-section{margin:14px 0;padding:15px;border:1px solid #e4e7f3;border-radius:15px;background:#fbfcff}.theory-section h3{margin:0 0 8px;color:#1d4ed8}.formula{background:#eef2ff;padding:9px 10px;border-radius:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:800;margin:6px 0}.remember{background:#fff5d6;border-left:4px solid var(--yellow);padding:10px;border-radius:10px;font-weight:800}.cheat{width:100%;border-collapse:collapse;margin-top:12px}.cheat td,.cheat th{border:1px solid #e5e7eb;padding:9px;text-align:left}.cheat th{background:#f5f3ff;color:#5b21b6}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.result-card{padding:14px;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;text-align:center}.result-card strong{display:block;font-size:24px;color:#5b21b6}.weak-list{display:grid;gap:8px}.weak-item{padding:10px 12px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-weight:800}
+.confetti-piece{position:fixed;width:8px;height:12px;z-index:200;pointer-events:none;animation:confettiFall 1s ease-out forwards}@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0);opacity:1}100%{transform:translateY(160px) rotate(540deg);opacity:0}}
+.review-list{display:grid;gap:12px}.review-card{border:1px solid #e5e7eb;border-radius:14px;padding:14px;background:#fff}.review-card h4{margin:0 0 8px}.review-card .your{color:#9f1239}.review-card .correctAns{color:#166534}
+.footer-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;justify-content:center}
+.teacher-note{font-size:12px;color:#94a3b8;text-align:center;margin-top:12px}
+@media(max-width:760px){
+  .student-form,.intro-grid,.result-grid,.ex-grid{grid-template-columns:1fr}.welcome-card{padding:22px}.question-card{padding:17px}.q-title{font-size:18px}.toolbar{top:4px}.header-row{align-items:flex-start;flex-direction:column}.stats{gap:6px}.pill{font-size:11px}.tf-grid{grid-template-columns:1fr}.fill-row{flex-direction:column}.nav-row button{min-width:0;flex:1}.toolbar-actions .icon-btn{padding:7px 8px}.modal{padding:17px}
+}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{
+  body{background:#fff!important;color:#000}.decor,.toolbar,.nav-row,.toolbar-actions,.footer-actions,.modal-backdrop{display:none!important}.app{width:100%;padding:0}.top-header,.question-card,.explanation{box-shadow:none;border:1px solid #aaa;background:#fff}.question-card{page-break-inside:avoid}.hidden-print{display:none!important}
+}
+</style>
+</head>
+<body>
+<div class="decor" aria-hidden="true"><span>📘</span><span>✨</span><span>✏️</span><span>💬</span><span>💡</span><span>ABC</span></div>
+<div class="app">
+  <section id="welcome" class="welcome">
+    <div class="welcome-card">
+      <span class="brand-badge">📚 INTERACTIVE GRAMMAR LAB</span>
+      <h1>LÝ THUYẾT ĐẢO NGỮ</h1>
+      <p class="subtitle">INVERSION – Master the structure, master the sentence!</p>
+      <p><strong>50 câu luyện tập từ nhận biết đến vận dụng</strong></p>
+      <div class="intro-grid">
+        <div class="intro-box"><strong>PHẦN 1</strong><span>30 câu lý thuyết – Theory Check</span></div>
+        <div class="intro-box"><strong>PHẦN 2</strong><span>20 câu viết lại câu – Application</span></div>
+      </div>
+      <div class="student-form">
+        <div class="field"><label for="studentName">Họ và tên học sinh</label><input id="studentName" autocomplete="name" placeholder="Nhập họ và tên" /></div>
+        <div class="field"><label for="studentClass">Lớp</label><input id="studentClass" placeholder="Ví dụ: 10A1" /></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+        <button id="startBtn" class="primary">BẮT ĐẦU HỌC →</button>
+        <button id="resumeBtn" class="secondary hidden">TIẾP TỤC BÀI ĐANG HỌC</button>
+      </div>
+      <p class="teacher-note">Created by: Ms Tuyet Mai FTU · Contact: 0365 423 820</p>
+    </div>
+  </section>
+
+  <main id="quizApp" class="hidden">
+    <header class="top-header">
+      <div class="header-row">
+        <div><div class="title-mini">LÝ THUYẾT ĐẢO NGỮ</div><div class="meta">Created by: Ms Tuyet Mai FTU · Contact: 0365 423 820</div></div>
+        <div class="meta" id="studentMeta"></div>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <div class="toolbar-top">
+        <div class="stats">
+          <span class="pill" id="pQuestion">Câu 1 / 50</span>
+          <span class="pill" id="pDone">Đã làm: 0</span>
+          <span class="pill" id="pCorrect">Đúng lần đầu: 0</span>
+          <span class="pill" id="pWrong">Sai lần đầu: 0</span>
+          <span class="pill" id="pAccuracy">Accuracy: 0%</span>
+          <span class="pill" id="pStreak">🔥 Streak: 0</span>
+        </div>
+        <div class="toolbar-actions">
+          <button class="icon-btn" id="theoryBtn" aria-label="Xem nhanh công thức">📚 Công thức</button>
+          <button class="icon-btn" id="soundBtn" aria-label="Bật tắt âm thanh">🔊 Sound ON</button>
+          <button class="icon-btn" id="printBtn" aria-label="In bài">🖨 In</button>
+        </div>
+      </div>
+      <div class="progress-track" aria-label="Tiến độ"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <section id="questionHost" class="question-card"></section>
+  </main>
+</div>
+
+<div id="modalRoot"></div>
+
+<script>
+"use strict";
+
+const CATEGORY_LABELS = {
+  negative:"NO / Negative expressions", only:"ONLY inversion", "so-such":"SO / SUCH ... THAT",
+  conditional:"Conditional inversion", "hardly-no-sooner":"Hardly / No sooner", "not-only":"Not only ... but also",
+  "not-until":"Not until / till", agreement:"So / Neither / Nor", "place-inversion":"Place / Direction inversion"
+};
+
+const questions = [
+// 1–7 NO / NEGATIVE EXPRESSIONS
+{ id:1,section:"theory",category:"negative",type:"mcq",question:"Never ______ such a beautiful view before.",options:["I have seen","have I seen","did I saw","have seen I"],correct:1,translation:"Tôi chưa bao giờ nhìn thấy một khung cảnh đẹp như vậy trước đây.",rule:"Never + auxiliary + S + V",clue:"Never đứng đầu câu → phải đảo trợ động từ lên trước chủ ngữ.",remember:"Nếu dùng have/has trong hiện tại hoàn thành, trật tự là Never + have/has + S + V3.",analysis:["Sai: không đảo trợ động từ.","Đúng: have đứng trước chủ ngữ I và seen là V3.","Sai: sau did phải dùng see, không dùng saw; hơn nữa câu gốc phù hợp hiện tại hoàn thành.","Sai: chủ ngữ phải đứng giữa trợ động từ và động từ chính."]},
+{ id:2,section:"theory",category:"negative",type:"mcq",question:"Under no circumstances ______ students cheat in an exam.",options:["students should","should students","students do","do students should"],correct:1,translation:"Trong bất kỳ hoàn cảnh nào học sinh cũng không được gian lận trong kỳ thi.",rule:"Under no circumstances + modal/auxiliary + S + V",clue:"Cụm phủ định được đưa lên đầu câu.",remember:"Với modal verb, chỉ cần đưa modal lên trước chủ ngữ.",analysis:["Sai: chưa đảo should lên trước chủ ngữ.","Đúng: should + students + cheat.","Sai: do không phù hợp với ý nghĩa cấm đoán/khuyên bảo của câu.","Sai: không dùng đồng thời do và should theo trật tự này."]},
+{ id:3,section:"theory",category:"negative",type:"mcq",question:"By no means ______ easy.",options:["this task is","is this task","does this task be","this task does"],correct:1,translation:"Nhiệm vụ này hoàn toàn không dễ.",rule:"By no means + be/auxiliary + S + ...",clue:"By no means mang nghĩa phủ định mạnh và đứng đầu câu.",remember:"Nếu động từ chính là be, đảo chính be lên trước chủ ngữ.",analysis:["Sai: giữ trật tự câu khẳng định.","Đúng: is + this task.","Sai: không dùng does + be trong cấu trúc này.","Sai: cấu trúc thiếu động từ chính phù hợp."]},
+{ id:4,section:"theory",category:"negative",type:"mcq",question:"For no reason ______ this button without permission.",options:["you should press","should you press","you press should","do should you press"],correct:1,translation:"Không vì lý do gì bạn được nhấn nút này khi chưa được phép.",rule:"For no reason + modal/auxiliary + S + V",clue:"For no reason được đưa lên đầu câu.",remember:"Sau should dùng động từ nguyên mẫu: press.",analysis:["Sai: chưa đảo should.","Đúng: should + you + press.","Sai: sai trật tự từ.","Sai: không thêm do trước should."]},
+{ id:5,section:"theory",category:"negative",type:"mcq",question:"Choose the correct inversion with “No longer”.",options:["No longer he works here.","No longer does he work here.","No longer does he works here.","No longer he does work here."],correct:1,translation:"Anh ấy không còn làm việc ở đây nữa.",rule:"No longer + do/does/did + S + V",clue:"Câu gốc ở hiện tại đơn với chủ ngữ he.",remember:"Dùng does → động từ chính trở về nguyên mẫu work.",analysis:["Sai: chưa đảo trợ động từ.","Đúng: does + he + work.","Sai: sau does phải dùng work, không dùng works.","Sai: trật tự đảo ngữ chưa đúng."]},
+{ id:6,section:"theory",category:"negative",type:"mcq",question:"Nowhere ______ a better view than from this hill.",options:["you can find","can you find","do you can find","can find you"],correct:1,translation:"Không nơi nào bạn có thể tìm được một khung cảnh đẹp hơn từ ngọn đồi này.",rule:"Nowhere + modal/auxiliary + S + V",clue:"Nowhere mang ý nghĩa phủ định và đứng đầu câu.",remember:"Với can, đảo can lên trước chủ ngữ.",analysis:["Sai: chưa đảo can.","Đúng: can + you + find.","Sai: không dùng do cùng can.","Sai: chủ ngữ phải đứng sau modal và trước động từ chính."]},
+{ id:7,section:"theory",category:"negative",type:"tf",question:"True or False: Khi “In no way” đứng đầu câu, mệnh đề sau đó phải đảo trợ động từ lên trước chủ ngữ.",options:["Đúng","Sai"],correct:0,translation:"Quy tắc: In no way đứng đầu câu kéo theo đảo ngữ ở mệnh đề chính.",rule:"In no way + auxiliary + S + V",clue:"In no way là cụm mang nghĩa phủ định.",remember:"Các cụm phủ định/giới hạn khi đứng đầu câu thường kéo theo đảo trợ động từ.",analysis:["Đúng: đây chính là quy tắc đảo ngữ với In no way.","Sai: nếu giữ trật tự S + V sau In no way thì không đúng dạng đảo ngữ yêu cầu."]},
+
+// 8–13 ONLY
+{ id:8,section:"theory",category:"only",type:"mcq",question:"Only after I talked to her ______ the problem.",options:["I understood","did I understand","I did understand","did I understood"],correct:1,translation:"Chỉ sau khi tôi nói chuyện với cô ấy, tôi mới hiểu vấn đề.",rule:"Only after + clause, + auxiliary + S + V",clue:"Only after mở đầu câu; mệnh đề chính ở quá khứ đơn.",remember:"Không đảo mệnh đề sau Only after; đảo mệnh đề chính bằng did + S + V.",analysis:["Sai: mệnh đề chính chưa đảo.","Đúng: did + I + understand.","Sai: đây là nhấn mạnh, không phải đảo ngữ đúng mẫu.","Sai: sau did phải dùng understand, không dùng understood."]},
+{ id:9,section:"theory",category:"only",type:"mcq",question:"Only by practising every day ______ your English.",options:["you can improve","can you improve","do you can improve","can improve you"],correct:1,translation:"Chỉ bằng cách luyện tập mỗi ngày bạn mới có thể cải thiện tiếng Anh.",rule:"Only by + V-ing + modal/auxiliary + S + V",clue:"Only by + V-ing đứng đầu câu.",remember:"Với can, đưa can lên trước chủ ngữ.",analysis:["Sai: chưa đảo can.","Đúng: can + you + improve.","Sai: không dùng do cùng modal can.","Sai: chủ ngữ không đứng sau động từ chính như vậy."]},
+{ id:10,section:"theory",category:"only",type:"mcq",question:"Only if you study hard ______ the exam.",options:["you will pass","will you pass","do you will pass","will pass you"],correct:1,translation:"Chỉ nếu bạn học chăm thì bạn mới vượt qua kỳ thi.",rule:"Only if + clause, + auxiliary/modal + S + V",clue:"Only if dẫn mệnh đề điều kiện; mệnh đề chính mới đảo.",remember:"Mệnh đề sau Only if giữ trật tự bình thường; đảo will + you + pass ở mệnh đề chính.",analysis:["Sai: mệnh đề chính chưa đảo.","Đúng: will + you + pass.","Sai: không dùng do trước will.","Sai: sai trật tự chủ ngữ."]},
+{ id:11,section:"theory",category:"only",type:"mcq",question:"Only when I arrived home ______ that I had lost my phone.",options:["I realised","did I realise","I did realised","did I realised"],correct:1,translation:"Chỉ khi về đến nhà tôi mới nhận ra mình đã làm mất điện thoại.",rule:"Only when + clause, + did + S + V",clue:"Mệnh đề chính là quá khứ đơn.",remember:"Sau did phải dùng realise, không dùng realised.",analysis:["Sai: chưa đảo mệnh đề chính.","Đúng: did + I + realise.","Sai: vừa sai vị trí đảo vừa sai dạng động từ.","Sai: sau did phải dùng realise."]},
+{ id:12,section:"theory",category:"only",type:"mcq",question:"Which part is inverted in: “Only when the lesson ended did the students leave the room.”?",options:["Only when the lesson ended","did the students leave the room","the lesson ended","Only when"],correct:1,translation:"Chỉ khi tiết học kết thúc, học sinh mới rời khỏi phòng.",rule:"Only when + normal clause, + inverted main clause",clue:"Mệnh đề ngay sau Only when không đảo.",remember:"Đảo ở mệnh đề chính, không đảo ở mệnh đề phụ sau only.",analysis:["Sai: mệnh đề sau Only when giữ trật tự bình thường.","Đúng: did đứng trước the students.","Sai: đây là mệnh đề phụ bình thường.","Sai: đây chỉ là cụm nối, không phải toàn mệnh đề đảo."]},
+{ id:13,section:"theory",category:"only",type:"mcq",question:"Choose the correct sentence.",options:["Only in this way we can solve the problem.","Only in this way can we solve the problem.","Only in this way can solve we the problem.","Only in this way do can we solve the problem."],correct:1,translation:"Chỉ bằng cách này chúng ta mới có thể giải quyết vấn đề.",rule:"Only in this way + modal/auxiliary + S + V",clue:"Only in this way đứng đầu câu.",remember:"Có modal can thì đảo can lên trước chủ ngữ; không thêm do.",analysis:["Sai: chưa đảo can.","Đúng: can + we + solve.","Sai: chủ ngữ phải đứng trước động từ chính.","Sai: không dùng do cùng can."]},
+
+// 14–17 SO/SUCH
+{ id:14,section:"theory",category:"so-such",type:"mcq",question:"The movie was so interesting that we watched it twice. → ______ that we watched it twice.",options:["So interesting the movie was","So interesting was the movie","Such interesting was the movie","So was interesting the movie"],correct:1,translation:"Bộ phim hay đến nỗi chúng tôi xem nó hai lần.",rule:"So + adjective + be + S + that + clause",clue:"interesting là tính từ và động từ là was.",remember:"Với be, đảo be lên trước chủ ngữ: So interesting was the movie...",analysis:["Sai: chưa đảo was.","Đúng: So + adjective + was + subject.","Sai: dùng Such không đúng cấu trúc này.","Sai: vị trí adjective và be không đúng."]},
+{ id:15,section:"theory",category:"so-such",type:"mcq",question:"He ran so quickly that nobody could catch him. → ______ that nobody could catch him.",options:["So quickly he ran","So quickly did he run","So quickly did he ran","Such quickly did he run"],correct:1,translation:"Anh ấy chạy nhanh đến mức không ai có thể bắt kịp.",rule:"So + adverb + did + S + V + that + clause",clue:"Câu gốc ở quá khứ đơn với động từ thường ran.",remember:"Dùng did → run về nguyên mẫu.",analysis:["Sai: chưa đảo trợ động từ.","Đúng: did + he + run.","Sai: sau did không dùng ran.","Sai: quickly là trạng từ; cấu trúc này dùng So, không dùng Such."]},
+{ id:16,section:"theory",category:"so-such",type:"tf",question:"True or False: Trong đảo ngữ với “So + adjective”, nếu động từ chính là “be” thì đưa “be” lên trước chủ ngữ.",options:["Đúng","Sai"],correct:0,translation:"Ví dụ: So difficult was the test that many students complained.",rule:"So + adjective + be + S + that + clause",clue:"Động từ be tự đảm nhiệm vị trí đảo.",remember:"Không cần do/does/did nếu động từ chính là be.",analysis:["Đúng: be đứng trước chủ ngữ trong dạng đảo này.","Sai: không cần trợ động từ do/does/did khi be là động từ chính."]},
+{ id:17,section:"theory",category:"so-such",type:"mcq",question:"Which formula is correct for the pattern in “So beautiful was the view that we stopped to take photos.”?",options:["So + adjective + be + S + that + clause","So + noun + S + be + that + clause","Such + adjective + auxiliary + S + that + clause","So + adjective + S + be + that + clause"],correct:0,translation:"Khung cảnh đẹp đến nỗi chúng tôi dừng lại để chụp ảnh.",rule:"So + adjective + be + S + that + clause",clue:"beautiful là adjective; was là be.",remember:"So đứng trước adjective/adverb; Such thường đi với noun phrase.",analysis:["Đúng: khớp hoàn toàn với câu mẫu.","Sai: thứ tự thành phần không đúng.","Sai: Such không dùng theo công thức này.","Sai: chưa đảo be lên trước chủ ngữ."]},
+
+// 18–22 CONDITIONAL
+{ id:18,section:"theory",category:"conditional",type:"mcq",question:"If you should need any help, call me. → ______ any help, call me.",options:["Should you need","You should need","Should need you","Do you should need"],correct:0,translation:"Nếu bạn cần bất kỳ sự giúp đỡ nào, hãy gọi cho tôi.",rule:"Should + S + V, ...",clue:"Đảo ngữ câu điều kiện loại 1 với should.",remember:"Bỏ IF và đưa Should lên đầu.",analysis:["Đúng: Should + you + need.","Sai: chưa đảo và chưa bỏ IF theo đúng mẫu.","Sai: chủ ngữ phải đứng sau should và trước động từ chính.","Sai: không dùng do cùng should."]},
+{ id:19,section:"theory",category:"conditional",type:"mcq",question:"If I were you, I would apologise. → ______, I would apologise.",options:["Were I you","I were you","Were you I","Did I were you"],correct:0,translation:"Nếu tôi là bạn, tôi sẽ xin lỗi.",rule:"Were + S + ..., S + would/could + V",clue:"Đảo ngữ câu điều kiện loại 2 với were.",remember:"Bỏ IF và đưa Were lên đầu.",analysis:["Đúng: Were + I + you.","Sai: vẫn là trật tự câu điều kiện thường.","Sai: đảo sai chủ ngữ/bổ ngữ.","Sai: không dùng did với were."]},
+{ id:20,section:"theory",category:"conditional",type:"mcq",question:"If the company were to close, many people would lose their jobs. → ______, many people would lose their jobs.",options:["Were the company to close","Was the company to close","Did the company close","Were to close the company"],correct:0,translation:"Nếu công ty đóng cửa, nhiều người sẽ mất việc.",rule:"Were + S + to V, S + would/could + V",clue:"Mẫu were to V dùng cho điều kiện giả định loại 2.",remember:"Bỏ IF; Were đứng đầu, sau chủ ngữ là to + V.",analysis:["Đúng: Were + the company + to close.","Sai: dạng đảo chuẩn dùng Were, không dùng Was.","Sai: đây không phải cấu trúc đảo điều kiện yêu cầu.","Sai: chủ ngữ phải đứng sau Were."]},
+{ id:21,section:"theory",category:"conditional",type:"mcq",question:"If she had studied harder, she would have passed the exam. → ______, she would have passed the exam.",options:["Had she studied harder","Did she study harder","She had studied harder","Had studied she harder"],correct:0,translation:"Nếu cô ấy học chăm hơn, cô ấy đã vượt qua kỳ thi.",rule:"Had + S + V3, S + would/could + have + V3",clue:"Câu điều kiện loại 3 có had + V3.",remember:"Bỏ IF và đưa Had lên đầu.",analysis:["Đúng: Had + she + studied.","Sai: không dùng did trong mẫu đảo điều kiện loại 3.","Sai: chưa đảo.","Sai: chủ ngữ phải đứng sau Had, trước V3."]},
+{ id:22,section:"theory",category:"conditional",type:"mcq",question:"Choose the correct matching of conditional inversion.",options:["Type 1 → Should; Type 2 → Were; Type 3 → Had","Type 1 → Had; Type 2 → Should; Type 3 → Were","Type 1 → Were; Type 2 → Had; Type 3 → Should","All types → Did"],correct:0,translation:"Ghép đúng dạng đảo ngữ của ba loại câu điều kiện.",rule:"Type 1: Should · Type 2: Were · Type 3: Had",clue:"Ba từ khóa tương ứng ba loại điều kiện.",remember:"Should – Were – Had là bộ ba cần ghi nhớ.",analysis:["Đúng: đúng theo ba mẫu chuẩn.","Sai: đảo vị trí các dạng.","Sai: đảo vị trí các dạng.","Sai: không dùng Did cho cả ba loại."]},
+
+// 23–30 OTHER
+{ id:23,section:"theory",category:"negative",type:"mcq",question:"Rarely ______ such talent.",options:["we see","do we see","we do see","see we"],correct:1,translation:"Hiếm khi chúng ta thấy tài năng như vậy.",rule:"Rarely + do/does/did + S + V",clue:"Rarely là trạng từ mang ý nghĩa phủ định/hạn định.",remember:"Hiện tại đơn, chủ ngữ we → dùng do.",analysis:["Sai: chưa đảo.","Đúng: do + we + see.","Sai: không phải trật tự đảo ngữ.","Sai: thiếu trợ động từ trong hiện tại đơn."]},
+{ id:24,section:"theory",category:"hardly-no-sooner",type:"mcq",question:"Hardly had I arrived home ______ it started raining.",options:["than","when","then","that"],correct:1,translation:"Tôi vừa về đến nhà thì trời bắt đầu mưa.",rule:"Hardly/Barely/Scarcely + had + S + V3 + when + S + V2",clue:"Hardly đi với WHEN.",remember:"Hardly/Scarcely/Barely → WHEN; No sooner → THAN.",analysis:["Sai: than đi với No sooner.","Đúng: Hardly ... when.","Sai: then không phải liên từ trong cấu trúc này.","Sai: that không dùng trong mẫu này."]},
+{ id:25,section:"theory",category:"hardly-no-sooner",type:"mcq",question:"No sooner had she arrived ______ the meeting started.",options:["when","than","that","then"],correct:1,translation:"Cô ấy vừa đến thì cuộc họp bắt đầu.",rule:"No sooner + had + S + V3 + than + S + V2",clue:"No sooner luôn đi với THAN trong cấu trúc này.",remember:"No sooner → THAN.",analysis:["Sai: when đi với Hardly/Scarcely/Barely.","Đúng: No sooner ... than.","Sai: that không đúng cấu trúc.","Sai: then không đúng cấu trúc."]},
+{ id:26,section:"theory",category:"not-only",type:"mcq",question:"Not only ______ English fluently, but she also speaks French.",options:["she speaks","does she speak","she does speaks","does speak she"],correct:1,translation:"Cô ấy không những nói tiếng Anh trôi chảy mà còn nói tiếng Pháp.",rule:"Not only + auxiliary + S + V + but also + S + V",clue:"Not only đứng đầu mệnh đề thứ nhất.",remember:"Chỉ đảo mệnh đề bắt đầu bằng Not only.",analysis:["Sai: mệnh đề Not only chưa đảo.","Đúng: does + she + speak.","Sai: sau does dùng speak, không speaks.","Sai: chủ ngữ phải đứng giữa does và speak."]},
+{ id:27,section:"theory",category:"not-until",type:"mcq",question:"Not until the teacher explained it ______ the problem.",options:["I understood","did I understand","did I understood","I did understood"],correct:1,translation:"Mãi đến khi giáo viên giải thích, tôi mới hiểu vấn đề.",rule:"Not until + time/clause + auxiliary + S + V",clue:"Mệnh đề chính ở quá khứ đơn.",remember:"Mệnh đề sau Not until không đảo; mệnh đề chính dùng did + S + V.",analysis:["Sai: mệnh đề chính chưa đảo.","Đúng: did + I + understand.","Sai: sau did phải dùng understand.","Sai: vừa sai trật tự vừa sai dạng động từ."]},
+{ id:28,section:"theory",category:"agreement",type:"mcq",question:"She doesn't like coffee. — ______.",options:["So do I","Neither do I","Neither I do","Nor I don't"],correct:1,translation:"Cô ấy không thích cà phê. — Tôi cũng không.",rule:"Neither/Nor + auxiliary + S",clue:"Câu trước là phủ định ở hiện tại đơn.",remember:"Đồng tình với câu phủ định: Neither/Nor + auxiliary + S.",analysis:["Sai: So dùng để đồng tình với câu khẳng định.","Đúng: Neither + do + I.","Sai: sai trật tự đảo.","Sai: không dùng phủ định kép theo mẫu này."]},
+{ id:29,section:"theory",category:"place-inversion",type:"mcq",question:"Choose the correct sentence with place inversion.",options:["On the hill an old castle stood.","On the hill stood an old castle.","On the hill did stand an old castle.","On the hill stood it."],correct:1,translation:"Trên ngọn đồi có một lâu đài cổ.",rule:"Adverb of place + V + S",clue:"Đảo ngữ nơi chốn thường đưa động từ lên trước chủ ngữ danh từ.",remember:"Kiểu này thường không dùng trợ động từ; với đại từ thường không đảo.",analysis:["Sai: giữ trật tự S + V, không phải dạng đảo mẫu.","Đúng: place phrase + stood + noun subject.","Sai: không cần did trong mẫu này.","Sai: với chủ ngữ đại từ it, thường không đảo kiểu này."]},
+{ id:30,section:"theory",category:"place-inversion",type:"mcq",question:"Which sentence is correct when the subject is a pronoun?",options:["Here comes he.","Here he comes.","Here does he come.","Here come he."],correct:1,translation:"Khi chủ ngữ là đại từ, thường giữ trật tự chủ ngữ trước động từ.",rule:"Here + pronoun + V",clue:"Chủ ngữ he là đại từ.",remember:"Here comes the bus, nhưng Here he comes.",analysis:["Sai: với đại từ, không đảo thành comes he.","Đúng: Here + he + comes.","Sai: không cần does trong cấu trúc này.","Sai: vừa sai trật tự vừa sai hòa hợp chủ-vị."]},
+
+// 31–50 WRITING FIXED
+{ id:31,section:"application",category:"negative",type:"writing",original:"I have never seen such an impressive performance.",instruction:"Begin with: Never",acceptedAnswers:["never have i seen such an impressive performance"],answer:"Never have I seen such an impressive performance.",hints:["Đưa Never lên đầu câu.","Câu gốc dùng hiện tại hoàn thành.","Cấu trúc: Never + have + S + V3."],explanation:"Never đứng đầu câu → đảo have lên trước chủ ngữ I; động từ seen giữ nguyên V3."},
+{ id:32,section:"application",category:"negative",type:"writing",original:"You must not open this door under any circumstances.",instruction:"Begin with: Under no circumstances",acceptedAnswers:["under no circumstances must you open this door"],answer:"Under no circumstances must you open this door.",hints:["Đưa cụm phủ định lên đầu.","Câu có modal verb must.","Đảo must lên trước chủ ngữ you."],explanation:"Under no circumstances + modal + S + V. Vì có must, chỉ cần đảo must lên trước you."},
+{ id:33,section:"application",category:"negative",type:"writing",original:"He no longer works for this company.",instruction:"Begin with: No longer",acceptedAnswers:["no longer does he work for this company"],answer:"No longer does he work for this company.",hints:["Đưa No longer lên đầu.","Hiện tại đơn, chủ ngữ he.","Dùng does + he + work."],explanation:"No longer đứng đầu → dùng đảo ngữ với does. Sau does, works trở về work."},
+{ id:34,section:"application",category:"only",type:"writing",original:"You can improve your speaking skills only by practising regularly.",instruction:"Begin with: Only by",acceptedAnswers:["only by practising regularly can you improve your speaking skills"],answer:"Only by practising regularly can you improve your speaking skills.",hints:["Only by + V-ing.","Giữ practising regularly ngay sau Only by.","Đảo can lên trước you."],explanation:"Only by + V-ing đứng đầu → mệnh đề chính đảo: can + you + improve."},
+{ id:35,section:"application",category:"only",type:"writing",original:"I realised how serious the problem was only after I talked to my teacher.",instruction:"Begin with: Only after",acceptedAnswers:["only after i talked to my teacher did i realise how serious the problem was"],answer:"Only after I talked to my teacher did I realise how serious the problem was.",hints:["Only after + clause, sau đó đảo mệnh đề chính.","Câu gốc ở quá khứ đơn.","Trợ động từ cần dùng là DID."],explanation:"Mệnh đề sau Only after giữ nguyên; mệnh đề chính đảo bằng did + I + realise. Sau did dùng realise."},
+{ id:36,section:"application",category:"only",type:"writing",original:"You will understand the lesson only if you pay attention.",instruction:"Begin with: Only if",acceptedAnswers:["only if you pay attention will you understand the lesson"],answer:"Only if you pay attention will you understand the lesson.",hints:["Only if + clause.","Mệnh đề sau Only if không đảo.","Đảo will lên trước you ở mệnh đề chính."],explanation:"Only if you pay attention giữ trật tự bình thường; mệnh đề chính đảo thành will you understand."},
+{ id:37,section:"application",category:"negative",type:"writing",original:"She rarely goes out on weekdays.",instruction:"Begin with: Rarely",acceptedAnswers:["rarely does she go out on weekdays"],answer:"Rarely does she go out on weekdays.",hints:["Rarely là trạng từ phủ định/hạn định.","Hiện tại đơn, chủ ngữ she.","Dùng does + she + go."],explanation:"Rarely đứng đầu → does + she + go. Sau does, goes → go."},
+{ id:38,section:"application",category:"hardly-no-sooner",type:"writing",original:"He had just entered the classroom when the bell rang.",instruction:"Begin with: Hardly",acceptedAnswers:["hardly had he entered the classroom when the bell rang"],answer:"Hardly had he entered the classroom when the bell rang.",hints:["Hardly đi với WHEN.","Mệnh đề đầu dùng past perfect.","Hardly + had + S + V3 + when..."],explanation:"Cấu trúc: Hardly had he entered ... when the bell rang. Hardly không đi với than."},
+{ id:39,section:"application",category:"hardly-no-sooner",type:"writing",original:"The teacher had just finished speaking when the students started asking questions.",instruction:"Begin with: No sooner",acceptedAnswers:["no sooner had the teacher finished speaking than the students started asking questions"],answer:"No sooner had the teacher finished speaking than the students started asking questions.",hints:["No sooner đi với THAN.","Đảo had lên trước the teacher.","No sooner + had + S + V3 + than..."],explanation:"No sooner luôn kết hợp với than trong mẫu này; mệnh đề đầu đảo had + subject + V3."},
+{ id:40,section:"application",category:"not-until",type:"writing",original:"I didn't understand the importance of the lesson until I took the exam.",instruction:"Begin with: Not until",acceptedAnswers:["not until i took the exam did i understand the importance of the lesson"],answer:"Not until I took the exam did I understand the importance of the lesson.",hints:["Not until + clause.","Mệnh đề sau Not until không đảo.","Mệnh đề chính dùng did + I + understand."],explanation:"Đảo chỉ xảy ra ở mệnh đề chính: did I understand. Sau did dùng understand."},
+{ id:41,section:"application",category:"not-only",type:"writing",original:"She is intelligent and she is also extremely hard-working.",instruction:"Begin with: Not only",acceptedAnswers:["not only is she intelligent but she is also extremely hard-working","not only is she intelligent but also she is extremely hard-working"],answer:"Not only is she intelligent, but she is also extremely hard-working.",hints:["Not only đứng đầu mệnh đề thứ nhất.","Động từ chính là be: is.","Đảo is lên trước she; mệnh đề but also không cần đảo."],explanation:"Not only + be + S + complement; chỉ mệnh đề Not only đảo: is she intelligent."},
+{ id:42,section:"application",category:"conditional",type:"writing",original:"If you should have any questions, please contact me.",instruction:"Remove IF.",acceptedAnswers:["should you have any questions please contact me"],answer:"Should you have any questions, please contact me.",hints:["Đảo ngữ điều kiện loại 1.","Bỏ If.","Đưa Should lên đầu câu."],explanation:"If + S + should + V → Should + S + V."},
+{ id:43,section:"application",category:"conditional",type:"writing",original:"If I were in your position, I would accept the offer.",instruction:"Remove IF.",acceptedAnswers:["were i in your position i would accept the offer"],answer:"Were I in your position, I would accept the offer.",hints:["Đảo ngữ điều kiện loại 2.","Bỏ If.","Đưa Were lên đầu câu."],explanation:"If + S + were... → Were + S + ..."},
+{ id:44,section:"application",category:"conditional",type:"writing",original:"If she had studied harder, she would have passed the exam.",instruction:"Remove IF.",acceptedAnswers:["had she studied harder she would have passed the exam"],answer:"Had she studied harder, she would have passed the exam.",hints:["Đảo ngữ điều kiện loại 3.","Bỏ If.","Đưa Had lên đầu câu, giữ studied ở V3."],explanation:"If + S + had + V3 → Had + S + V3."},
+{ id:45,section:"application",category:"so-such",type:"writing",original:"The book was so interesting that I couldn't put it down.",instruction:"Begin with: So",acceptedAnswers:["so interesting was the book that i couldn't put it down","so interesting was the book that i could not put it down"],answer:"So interesting was the book that I couldn't put it down.",hints:["So + adjective.","Động từ chính là was.","Đưa was lên trước chủ ngữ the book."],explanation:"So + adjective + be + S + that + clause → So interesting was the book..."},
+{ id:46,section:"application",category:"negative",type:"writing",original:"He knew very little about what was going to happen.",instruction:"Begin with: Little",acceptedAnswers:["little did he know about what was going to happen"],answer:"Little did he know about what was going to happen.",hints:["Little mang nghĩa phủ định khi đứng đầu.","Câu gốc ở quá khứ đơn.","Dùng did + he + know."],explanation:"Little đứng đầu → đảo did lên trước he. Sau did dùng know, không knew."},
+{ id:47,section:"application",category:"only",type:"writing",original:"We can solve the problem only in this way.",instruction:"Begin with: Only in this way",acceptedAnswers:["only in this way can we solve the problem"],answer:"Only in this way can we solve the problem.",hints:["Đưa cụm Only in this way lên đầu.","Câu có modal can.","Đảo can lên trước we."],explanation:"Only in this way + can + S + V."},
+{ id:48,section:"application",category:"not-until",type:"writing",original:"The students did not realise how difficult the test was until they started doing it.",instruction:"Begin with: Not until",acceptedAnswers:["not until the students started doing the test did they realise how difficult it was"],answer:"Not until the students started doing the test did they realise how difficult it was.",hints:["Not until + clause.","Không đảo mệnh đề sau Not until.","Mệnh đề chính: did + they + realise."],explanation:"Mệnh đề thời gian giữ nguyên; mệnh đề chính đảo bằng did they realise. Sau did dùng realise."},
+{ id:49,section:"application",category:"place-inversion",type:"writing",original:"A beautiful old castle stood on the hill.",instruction:"Begin with: On the hill",acceptedAnswers:["on the hill stood a beautiful old castle"],answer:"On the hill stood a beautiful old castle.",hints:["Đưa trạng từ nơi chốn lên đầu.","Kiểu này dùng V + S.","Không dùng did."],explanation:"Đảo ngữ nơi chốn: On the hill + stood + a beautiful old castle."},
+{ id:50,section:"application",category:"hardly-no-sooner",type:"writing",original:"She had barely sat down when the phone rang.",instruction:"Begin with: Barely",acceptedAnswers:["barely had she sat down when the phone rang"],answer:"Barely had she sat down when the phone rang.",hints:["Barely đi với WHEN.","Mệnh đề đầu dùng past perfect.","Barely + had + S + V3 + when..."],explanation:"Barely + had + S + V3 + when + past simple. Không dùng than với Barely."}
+];
+
+const STORAGE_KEY = "inversion_master_v1";
+const state = {
+  studentName:"", studentClass:"", currentIndex:0, soundEnabled:true,
+  responses:{}, hintLevels:{}, streak:0, bestStreak:0, theoryMilestoneShown:false, submitted:false
+};
+
+const $ = (sel) => document.querySelector(sel);
+const els = {
+  welcome:$("#welcome"), quizApp:$("#quizApp"), studentName:$("#studentName"), studentClass:$("#studentClass"),
+  startBtn:$("#startBtn"), resumeBtn:$("#resumeBtn"), studentMeta:$("#studentMeta"), questionHost:$("#questionHost"),
+  pQuestion:$("#pQuestion"), pDone:$("#pDone"), pCorrect:$("#pCorrect"), pWrong:$("#pWrong"), pAccuracy:$("#pAccuracy"), pStreak:$("#pStreak"), progressFill:$("#progressFill"),
+  theoryBtn:$("#theoryBtn"), soundBtn:$("#soundBtn"), printBtn:$("#printBtn"), modalRoot:$("#modalRoot")
+};
+
+function normalizeText(s){
+  return (s||"").toLowerCase().replace(/[’‘]/g,"'").replace(/[.,!?;:]+$/g,"").replace(/,/g,"").replace(/\s+/g," ").trim();
+}
+function playTone(type){
+  if(!state.soundEnabled) return;
+  try{
+    const Ctx=window.AudioContext||window.webkitAudioContext; if(!Ctx) return;
+    const ctx=new Ctx(); const now=ctx.currentTime;
+    const beep=(freq,start,dur,kind="sine",gain=.08)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type=kind;o.frequency.setValueAtTime(freq,now+start);g.gain.setValueAtTime(gain,now+start);g.gain.exponentialRampToValueAtTime(.001,now+start+dur);o.connect(g);g.connect(ctx.destination);o.start(now+start);o.stop(now+start+dur)};
+    if(type==="correct"){beep(659,0,.14);beep(880,.12,.18)}
+    else if(type==="wrong"){beep(392,0,.12,"triangle",.07);beep(330,.12,.14,"triangle",.07);beep(262,.27,.20,"triangle",.07)}
+    else if(type==="finish"){beep(523,0,.12);beep(659,.12,.12);beep(784,.24,.14);beep(1046,.38,.25)}
+    else beep(520,0,.06,"sine",.035);
+    setTimeout(()=>ctx.close(),900);
+  }catch(e){}
+}
+function confetti(big=false){
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const n=big?70:26; const colors=["#6C2BD9","#2563EB","#06B6D4","#FF8A3D","#FACC15","#22C55E","#EC4899"];
+  for(let i=0;i<n;i++){
+    const d=document.createElement("i"); d.className="confetti-piece"; d.style.left=(40+Math.random()*20)+"vw"; d.style.top=(12+Math.random()*8)+"vh"; d.style.background=colors[i%colors.length]; d.style.transform=`rotate(${Math.random()*360}deg)`; d.style.animationDuration=(.7+Math.random()*.55)+"s"; document.body.appendChild(d); setTimeout(()=>d.remove(),1500);
+  }
+}
+function save(){ localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); }
+function load(){
+  try{const s=JSON.parse(localStorage.getItem(STORAGE_KEY)); if(s && s.studentName){Object.assign(state,s);return true}}catch(e){} return false;
+}
+function clearSaved(){localStorage.removeItem(STORAGE_KEY)}
+function startNew(){
+  const name=els.studentName.value.trim(); const cls=els.studentClass.value.trim();
+  if(!name){els.studentName.focus();els.studentName.style.borderColor="#fb7185";return}
+  Object.assign(state,{studentName:name,studentClass:cls,currentIndex:0,soundEnabled:true,responses:{},hintLevels:{},streak:0,bestStreak:0,theoryMilestoneShown:false,submitted:false});
+  playTone("click"); save(); enterQuiz();
+}
+function enterQuiz(){els.welcome.classList.add("hidden");els.quizApp.classList.remove("hidden");els.studentMeta.innerHTML=`<strong>${escapeHtml(state.studentName)}</strong>${state.studentClass?` · Lớp ${escapeHtml(state.studentClass)}`:""}`;updateToolbar();renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}
+function escapeHtml(s){return String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))}
+function stats(){
+  const vals=Object.values(state.responses); const first=vals.filter(r=>r.firstAnswered); const correct=first.filter(r=>r.firstCorrect).length; const wrong=first.length-correct;
+  return {done:first.length,correct,wrong,accuracy:first.length?Math.round(correct/first.length*100):0};
+}
+function updateToolbar(){
+  const st=stats(); els.pQuestion.textContent=`Câu ${state.currentIndex+1} / 50`;els.pDone.textContent=`Đã làm: ${st.done}`;els.pCorrect.textContent=`Đúng lần đầu: ${st.correct}`;els.pWrong.textContent=`Sai lần đầu: ${st.wrong}`;els.pAccuracy.textContent=`Accuracy: ${st.accuracy}%`;els.pStreak.textContent=`🔥 Streak: ${state.streak}`;els.progressFill.style.width=`${st.done/50*100}%`;els.soundBtn.textContent=state.soundEnabled?"🔊 Sound ON":"🔇 Sound OFF";
+}
+function ensureResp(id){if(!state.responses[id]) state.responses[id]={firstAnswered:false,firstCorrect:false,firstAnswer:"",latestAnswer:"",retries:0,locked:false};return state.responses[id]}
+function renderQuestion(){
+  const q=questions[state.currentIndex], r=ensureResp(q.id); updateToolbar();
+  const sectionLabel=q.section==="theory"?"PHẦN 1 · THEORY CHECK":"PHẦN 2 · CHINH PHỤC ĐẢO NGỮ";
+  let body=`<div class="q-head"><span class="q-num">Câu ${q.id}</span><span class="q-cat">${sectionLabel} · ${CATEGORY_LABELS[q.category]}</span></div>`;
+  if(q.type==="writing"){
+    body+=`<div class="original-box"><strong>Original sentence:</strong><br>${escapeHtml(q.original)}</div><div class="keyword">${escapeHtml(q.instruction)}</div><textarea class="writing-box" id="writingInput" aria-label="Nhập câu trả lời" placeholder="Viết lại câu tại đây..." ${r.locked?'disabled':''}>${escapeHtml(r.latestAnswer||"")}</textarea><div class="writing-actions"><button class="primary" id="checkWriting" ${r.locked?'disabled':''}>KIỂM TRA</button><button class="soft" id="hintBtn">💡 GỢI Ý</button></div><div id="hintArea"></div>`;
+  }else if(q.type==="fill"){
+    body+=`<div class="q-title">${q.question}</div><div class="fill-row"><input class="answer-input" id="fillInput" aria-label="Điền đáp án" ${r.locked?'disabled':''}/><button class="primary" id="checkFill" ${r.locked?'disabled':''}>KIỂM TRA</button></div>`;
+  }else{
+    body+=`<div class="q-title">${q.question}</div><div class="options ${q.type==='tf'?'tf-grid':''}">`+q.options.map((opt,i)=>{
+      let cls="option"; let tag="";
+      if(r.locked){if(i===q.correct){cls+=" correct";tag="<span>✓ ĐÁP ÁN ĐÚNG</span>"}else if(String(i)===String(r.latestAnswer)&&!r.firstCorrect){cls+=" wrong";tag="<span>✕ SAI</span>"}}
+      return `<button class="${cls}" data-opt="${i}" ${r.locked?'disabled':''}><span class="letter">${String.fromCharCode(65+i)}</span><span style="flex:1">${escapeHtml(opt)}</span>${tag}</button>`}).join("")+`</div>`;
+  }
+  body+=`<div id="feedbackArea"></div>`;
+  if(r.locked) body+=buildFeedback(q,r)+buildExplanation(q,r);
+  body+=`<div class="nav-row"><button class="secondary" id="prevBtn" ${state.currentIndex===0?'disabled':''}>← Câu trước</button><div style="display:flex;gap:8px">${r.firstAnswered&& !r.firstCorrect?'<button class="soft" id="retryBtn">Làm lại câu này</button>':''}${q.id===50?'<button class="primary" id="submitBtn">NỘP BÀI & XEM KẾT QUẢ</button>':'<button class="primary" id="nextBtn">Câu tiếp theo →</button>'}</div></div>`;
+  els.questionHost.innerHTML=body;
+  bindQuestionEvents(q,r);
+  if(q.type==="writing" && state.hintLevels[q.id]) renderHint(q);
+}
+function bindQuestionEvents(q,r){
+  els.questionHost.querySelectorAll(".option[data-opt]").forEach(btn=>btn.addEventListener("click",()=>answerMCQ(q,Number(btn.dataset.opt))));
+  $("#checkWriting")?.addEventListener("click",()=>checkWriting(q)); $("#hintBtn")?.addEventListener("click",()=>showHint(q));
+  $("#retryBtn")?.addEventListener("click",()=>retryQuestion(q)); $("#prevBtn")?.addEventListener("click",()=>go(-1)); $("#nextBtn")?.addEventListener("click",()=>go(1)); $("#submitBtn")?.addEventListener("click",submitQuiz);
+}
+function answerMCQ(q,choice){
+  const r=ensureResp(q.id); if(r.locked)return; const correct=choice===q.correct;
+  if(!r.firstAnswered){r.firstAnswered=true;r.firstCorrect=correct;r.firstAnswer=String(choice);state.streak=correct?state.streak+1:0;state.bestStreak=Math.max(state.bestStreak,state.streak)}
+  r.latestAnswer=String(choice);r.locked=true; correct?successFlow(q):failFlow(q);save();renderQuestion();checkMilestones(q.id);
+}
+function normalizeAnswer(s){return normalizeText(s).replace(/\bcannot\b/g,"can not")}
+function similarity(a,b){
+  const A=new Set(normalizeAnswer(a).split(" ")),B=new Set(normalizeAnswer(b).split(" "));let inter=0;A.forEach(x=>{if(B.has(x))inter++});return inter/Math.max(A.size,B.size,1);
+}
+function checkWriting(q){
+  const inp=$("#writingInput"); const raw=inp.value.trim(); if(!raw){inp.focus();return}
+  const r=ensureResp(q.id); if(r.locked)return; const norm=normalizeAnswer(raw); const correct=q.acceptedAnswers.some(a=>normalizeAnswer(a)===norm); const near=!correct && Math.max(...q.acceptedAnswers.map(a=>similarity(norm,a)))>=.72;
+  if(!r.firstAnswered){r.firstAnswered=true;r.firstCorrect=correct;r.firstAnswer=raw;state.streak=correct?state.streak+1:0;state.bestStreak=Math.max(state.bestStreak,state.streak)}
+  r.latestAnswer=raw;r.locked=true;r.near=near; correct?successFlow(q):failFlow(q,near);save();renderQuestion();checkMilestones(q.id);
+}
+function successFlow(q){playTone("correct");confetti(false)}
+function failFlow(q,near=false){playTone("wrong")}
+function buildFeedback(q,r){
+  if(r.firstCorrect || (q.type==="writing" && q.acceptedAnswers.some(a=>normalizeAnswer(a)===normalizeAnswer(r.latestAnswer)))) return `<div class="feedback good"><span>✓</span><span>Excellent! Chính xác!</span></div>`;
+  if(r.near) return `<div class="feedback near"><span>◔</span><span>Gần đúng rồi! Hãy kiểm tra lại trợ động từ, dạng động từ hoặc trật tự từ.</span></div>`;
+  return `<div class="feedback bad"><span>✕</span><span>Chưa chính xác! Xem lời giải ngay bên dưới nhé.</span></div>`;
+}
+function buildExplanation(q,r){
+  if(q.type==="writing"){
+    return `<div class="explanation"><h3>PHẦN GIẢI THÍCH</h3><div class="ex-grid"><div class="ex-item"><strong>Câu của con</strong><br>${escapeHtml(r.latestAnswer||"")}</div><div class="ex-item"><strong>Đáp án tham khảo</strong><br>${escapeHtml(q.answer)}</div></div><div class="answer-highlight">✅ ${escapeHtml(q.explanation)}</div><div class="structure">${structureFor(q)}</div><div class="ex-item" style="margin-top:10px"><strong>📌 Lỗi cần tránh:</strong> ${writingMistakeHint(q,r.latestAnswer)}</div></div>`;
+  }
+  const rows=q.options.map((opt,i)=>`<div class="analysis-row"><strong>${String.fromCharCode(65+i)}. ${escapeHtml(opt)}</strong> ${i===q.correct?'✅':'❌'}<br>${escapeHtml(q.analysis[i]||"")}</div>`).join("");
+  return `<div class="explanation"><h3>PHẦN GIẢI THÍCH CHI TIẾT</h3><div class="ex-grid"><div class="ex-item"><strong>📐 Cấu trúc</strong><div class="structure">${escapeHtml(q.rule)}</div></div><div class="ex-item"><strong>🔍 Dấu hiệu</strong><br>${escapeHtml(q.clue)}</div><div class="ex-item"><strong>🇻🇳 Dịch nghĩa</strong><br>${escapeHtml(q.translation)}</div><div class="ex-item"><strong>📌 Kiến thức cần nhớ</strong><br>${escapeHtml(q.remember)}</div></div><div class="option-analysis">${rows}</div><div class="answer-highlight">✅ Đáp án đúng: ${String.fromCharCode(65+q.correct)}. ${escapeHtml(q.options[q.correct])}</div></div>`;
+}
+function structureFor(q){
+  if(q.category==="negative") return "Negative expression + auxiliary/modal + S + V";
+  if(q.category==="only") return "Only ... + clause/phrase + auxiliary/modal + S + V";
+  if(q.category==="conditional") return "Should / Were / Had + S + ...";
+  if(q.category==="hardly-no-sooner") return "Hardly/Barely/Scarcely ... WHEN · No sooner ... THAN";
+  if(q.category==="not-until") return "Not until + time/clause + auxiliary + S + V";
+  if(q.category==="not-only") return "Not only + auxiliary + S + V + but also ...";
+  if(q.category==="so-such") return "So + adjective/adverb + auxiliary/be + S + that ...";
+  if(q.category==="place-inversion") return "Adverb of place/direction + V + S";
+  return "Inversion pattern";
+}
+function writingMistakeHint(q,ans){
+  const n=normalizeAnswer(ans||"");
+  if(/did .*\b(realised|understood|knew|went|saw)\b/.test(n)) return "Sau DID phải dùng động từ nguyên mẫu.";
+  if(q.category==="hardly-no-sooner" && q.instruction.toLowerCase().includes("no sooner") && n.includes(" when ")) return "No sooner đi với THAN, không đi với WHEN.";
+  if(q.category==="hardly-no-sooner" && /hardly|barely|scarcely/.test(q.instruction.toLowerCase()) && n.includes(" than ")) return "Hardly/Barely/Scarcely đi với WHEN, không đi với THAN.";
+  if(q.category==="only") return "Không đảo mệnh đề ngay sau Only if/when/after; đảo mệnh đề chính.";
+  if(q.category==="not-until") return "Mệnh đề sau Not until không đảo; mệnh đề chính mới đảo.";
+  if(q.category==="conditional") return "Bỏ IF và đưa Should/Were/Had lên trước chủ ngữ.";
+  return "Kiểm tra lại trật tự: từ/cụm đảo ngữ + trợ động từ/động từ + chủ ngữ + động từ chính.";
+}
+function retryQuestion(q){const r=ensureResp(q.id);r.retries=(r.retries||0)+1;r.locked=false;r.near=false;r.latestAnswer="";save();renderQuestion();}
+function go(delta){state.currentIndex=Math.max(0,Math.min(49,state.currentIndex+delta));save();renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}
+function showHint(q){state.hintLevels[q.id]=Math.min((state.hintLevels[q.id]||0)+1,q.hints.length);save();renderHint(q);playTone("click")}
+function renderHint(q){const level=state.hintLevels[q.id]||0, area=$("#hintArea"); if(!area)return; area.innerHTML=q.hints.slice(0,level).map((h,i)=>`<div class="hint-box">💡 Gợi ý ${i+1}: ${escapeHtml(h)}</div>`).join("")}
+function checkMilestones(id){
+  if(id===30 && !state.theoryMilestoneShown){state.theoryMilestoneShown=true;save();setTimeout(showTheoryResult,350)}
+  if(id===50){confetti(true);playTone("finish")}
+}
+function theoryStats(){const arr=questions.filter(q=>q.id<=30).map(q=>state.responses[q.id]).filter(Boolean).filter(r=>r.firstAnswered);const c=arr.filter(r=>r.firstCorrect).length;return {done:arr.length,correct:c,accuracy:arr.length?Math.round(c/arr.length*100):0}}
+function showTheoryResult(){
+  const s=theoryStats();let msg=s.correct>=27?"Xuất sắc! Bạn đã nắm rất chắc công thức đảo ngữ.":s.correct>=23?"Rất tốt! Chỉ cần rà lại một vài cấu trúc.":s.correct>=18?"Khá ổn! Hãy xem lại các công thức bạn còn nhầm.":"Nên xem lại Quick Theory trước khi bước sang phần vận dụng.";
+  showModal(`<h2>🎯 THEORY CHECK COMPLETED!</h2><div class="result-grid"><div class="result-card"><span>Điểm</span><strong>${s.correct}/30</strong></div><div class="result-card"><span>Accuracy</span><strong>${s.accuracy}%</strong></div><div class="result-card"><span>Đã làm</span><strong>${s.done}/30</strong></div></div><p><strong>${msg}</strong></p><div class="footer-actions"><button class="secondary" data-action="theory">📚 Xem lại lý thuyết</button><button class="primary" data-action="continue">✍️ Tiếp tục 20 câu vận dụng →</button></div>`);
+}
+function submitQuiz(){
+  const unanswered=questions.filter(q=>!state.responses[q.id]?.firstAnswered);
+  if(unanswered.length){
+    showModal(`<h2>📝 Bài chưa hoàn thành</h2><p>Bạn còn <strong>${unanswered.length}</strong> câu chưa hoàn thành.</p><div class="footer-actions"><button class="secondary" data-action="unanswered">Quay lại câu chưa làm</button><button class="primary" data-action="forceSubmit">Vẫn nộp bài</button></div>`);return;
+  }
+  finishQuiz();
+}
+function finishQuiz(){state.submitted=true;save();confetti(true);playTone("finish");showFinalResult()}
+function scoreSection(min,max){let c=0,d=0;for(let i=min;i<=max;i++){const r=state.responses[i];if(r?.firstAnswered){d++;if(r.firstCorrect)c++}}return {c,d}}
+function weakCategories(){
+  const map={};questions.forEach(q=>{const r=state.responses[q.id];if(!r?.firstAnswered)return;map[q.category]??={d:0,c:0};map[q.category].d++;if(r.firstCorrect)map[q.category].c++});
+  return Object.entries(map).map(([k,v])=>({k,p:Math.round(v.c/v.d*100)})).filter(x=>x.p<75).sort((a,b)=>a.p-b.p);
+}
+function showFinalResult(){
+  const th=scoreSection(1,30),ap=scoreSection(31,50),total=th.c+ap.c,st=stats();
+  let rank,totalMsg;if(total>=45){rank="🏆 INVERSION MASTER";totalMsg="Con làm rất tốt! Hãy tiếp tục phát huy nhé!"}else if(total>=40){rank="⭐ GRAMMAR EXPERT";totalMsg="Con làm khá tốt! Hãy xem lại một vài câu nhé!"}else if(total>=33){rank="🌱 GREAT PROGRESS";totalMsg="Con đã có cố gắng! Hãy đọc kỹ phần giải thích và làm lại nhé!"}else if(total>=25){rank="📚 KEEP PRACTISING";totalMsg="Con hãy xem lại các cấu trúc mình còn nhầm và thử thêm lần nữa nhé!"}else{rank="💪 REVIEW & TRY AGAIN";totalMsg="Không sao đâu! Con hãy bình tĩnh xem lại kiến thức và thử thêm lần nữa nhé!"}
+  const retries=Object.values(state.responses).reduce((a,r)=>a+(r.retries||0),0);const weak=weakCategories();
+  showModal(`<h2>🏆 INVERSION CHALLENGE COMPLETED!</h2><p><strong>${escapeHtml(state.studentName)}</strong>${state.studentClass?` · Lớp ${escapeHtml(state.studentClass)}`:""}</p><div class="result-grid"><div class="result-card"><span>Theory</span><strong>${th.c}/30</strong></div><div class="result-card"><span>Application</span><strong>${ap.c}/20</strong></div><div class="result-card"><span>Total</span><strong>${total}/50</strong></div><div class="result-card"><span>First-attempt accuracy</span><strong>${st.accuracy}%</strong></div><div class="result-card"><span>Retries</span><strong>${retries}</strong></div><div class="result-card"><span>Longest streak</span><strong>${state.bestStreak}</strong></div></div><div class="answer-highlight">${rank}<br>${totalMsg}</div>${weak.length?`<h3>CÁC NHÓM NÊN ÔN LẠI</h3><div class="weak-list">${weak.map(x=>`<div class="weak-item">⚠ ${CATEGORY_LABELS[x.k]} – ${x.p}%</div>`).join("")}</div>`:'<div class="feedback good">🎉 Không có nhóm nào dưới 75%.</div>'}<div class="footer-actions"><button class="secondary" data-action="reviewWrong">XEM CÁC CÂU ĐÃ SAI</button><button class="secondary" data-action="unanswered">QUAY LẠI CÂU CHƯA LÀM</button><button class="secondary" data-action="print">🖨 IN BÀI</button><button class="secondary" data-action="reset">LÀM LẠI TOÀN BỘ</button></div>`);
+}
+function showModal(inner){els.modalRoot.innerHTML=`<div class="modal-backdrop"><div class="modal"><button class="close-x" aria-label="Đóng">×</button>${inner}</div></div>`;els.modalRoot.querySelector(".close-x").addEventListener("click",closeModal);els.modalRoot.querySelectorAll("[data-action]").forEach(b=>b.addEventListener("click",()=>handleModalAction(b.dataset.action)))}
+function closeModal(){els.modalRoot.innerHTML=""}
+function handleModalAction(a){
+  if(a==="continue"){closeModal();state.currentIndex=30;save();renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}
+  else if(a==="theory"){closeModal();showTheoryModal()}
+  else if(a==="forceSubmit"){closeModal();finishQuiz()}
+  else if(a==="unanswered"){const q=questions.find(q=>!state.responses[q.id]?.firstAnswered);if(q){closeModal();state.currentIndex=q.id-1;save();renderQuestion()}else showModal(`<h2>🎉 Hoàn thành!</h2><p>Bạn đã hoàn thành tất cả các câu.</p>`)}
+  else if(a==="reviewWrong"){showReviewWrong()}
+  else if(a==="print"){closeModal();window.print()}
+  else if(a==="reset"){if(confirm("Bạn có chắc muốn xóa toàn bộ kết quả và làm lại từ đầu?")){clearSaved();location.reload()}}
+}
+function showReviewWrong(){
+  const wrong=questions.filter(q=>state.responses[q.id]?.firstAnswered && !state.responses[q.id].firstCorrect);
+  showModal(`<h2>🔎 XEM CÁC CÂU ĐÃ SAI</h2>${wrong.length?`<div class="review-list">${wrong.map(q=>{const r=state.responses[q.id];const your=q.type==='writing'?r.firstAnswer:(q.options[Number(r.firstAnswer)]||'');const correct=q.type==='writing'?q.answer:q.options[q.correct];return `<div class="review-card"><h4>Câu ${q.id} · ${CATEGORY_LABELS[q.category]}</h4><div>${escapeHtml(q.question||q.original)}</div><div class="your"><strong>Your answer:</strong> ${escapeHtml(your)}</div><div class="correctAns"><strong>Correct answer:</strong> ${escapeHtml(correct)}</div><div style="margin-top:6px">${escapeHtml(q.explanation||q.remember||q.rule||'')}</div></div>`}).join("")}</div>`:'<p>Không có câu sai lần đầu. Tuyệt vời!</p>'}`);
+}
+function showTheoryModal(){
+  showModal(`<h2>📚 XEM NHANH CÔNG THỨC</h2>
+  <div class="theory-section"><h3>1. NO / NEGATIVE EXPRESSIONS</h3><div class="formula">Negative expression + auxiliary/modal + S + V</div><p><strong>At no time / Never / Under/In no circumstances</strong> = không bao giờ / trong bất cứ hoàn cảnh nào cũng không</p><p><strong>By no means</strong> = hoàn toàn không · <strong>For no reason</strong> = không vì lý do gì · <strong>In no way</strong> = không bằng cách nào · <strong>On no account / condition</strong> = dù bất cứ lý do gì cũng không · <strong>No longer</strong> = không còn nữa · <strong>Nowhere</strong> = không nơi nào</p><p>Ví dụ: <em>Never have I seen such a beautiful place.</em></p></div>
+  <div class="theory-section"><h3>2. ONLY</h3><div class="formula">Only after/when/if + clause, + auxiliary + S + V</div><div class="formula">Only by + V-ing + auxiliary + S + V</div><div class="formula">Only with + N / Only later / Only then / Only in this way + auxiliary + S + V</div><div class="remember">REMEMBER: Không đảo mệnh đề ngay sau Only after/when/if. Mệnh đề CHÍNH mới đảo.</div></div>
+  <div class="theory-section"><h3>3. SO / SUCH ... THAT</h3><div class="formula">So + adjective/adverb + auxiliary/be + S + that + clause</div><p>Ví dụ: <em>So interesting was the movie that we watched it twice.</em></p><div class="formula">Such + be + N + that + clause</div></div>
+  <div class="theory-section"><h3>4. CONDITIONAL INVERSION</h3><div class="formula">Type 1: Should + S + V</div><div class="formula">Type 2: Were + S + (to V) + ...</div><div class="formula">Type 3: Had + S + V3</div><div class="remember">Should / Were / Had → bỏ IF.</div></div>
+  <div class="theory-section"><h3>5. OTHER PATTERNS</h3><div class="formula">Hardly/Barely/Scarcely + had + S + V3 + WHEN + S + V2</div><div class="formula">No sooner + had + S + V3 + THAN + S + V2</div><div class="formula">Not only + auxiliary + S + V + but also ...</div><div class="formula">Not until + time/clause + auxiliary + S + V</div><div class="formula">So / Neither / Nor + auxiliary + S</div><div class="formula">Adverb of place/direction + V + S</div><div class="remember">Với đại từ: Here he comes. Không viết Here comes he.</div></div>
+  <h3>QUICK CHEAT SHEET</h3><table class="cheat"><tr><th>Trigger</th><th>Formula</th></tr><tr><td>Never/Rarely/Seldom</td><td>Aux + S + V</td></tr><tr><td>Only after/when/if</td><td>Clause + Aux + S + V</td></tr><tr><td>Only by</td><td>V-ing + Aux + S + V</td></tr><tr><td>Hardly/Scarcely/Barely</td><td>had + S + V3 + when</td></tr><tr><td>No sooner</td><td>had + S + V3 + than</td></tr><tr><td>Not until</td><td>time/clause + Aux + S + V</td></tr><tr><td>Should / Were / Had</td><td>Conditional inversion</td></tr></table>`)
+}
+
+els.startBtn.addEventListener("click",startNew);
+els.resumeBtn.addEventListener("click",()=>{if(load())enterQuiz()});
+els.theoryBtn.addEventListener("click",showTheoryModal);
+els.soundBtn.addEventListener("click",()=>{state.soundEnabled=!state.soundEnabled;save();updateToolbar();playTone("click")});
+els.printBtn.addEventListener("click",()=>window.print());
+
+if(load()){
+  els.resumeBtn.classList.remove("hidden");els.studentName.value=state.studentName||"";els.studentClass.value=state.studentClass||"";
+}
+</script>
+</body>
+</html>
